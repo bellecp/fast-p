@@ -16,7 +16,7 @@ p () {
     # replace separator by tab character
     # sort to prepare for join
     # remove duplicates
-    ag -g ".pdf$"| sed 's/\([ \o47()"&;\\]\)/\\\1/g;s/\o15/\\r/g'  \
+    ag -U -g ".pdf$"| sed 's/\([ \o47()"&;\\]\)/\\\1/g;s/\o15/\\r/g'  \
         | xargs xxh64sum \
         | sed 's/  /\t/' \
         | sort \
