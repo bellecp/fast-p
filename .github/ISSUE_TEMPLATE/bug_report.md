@@ -25,6 +25,7 @@ Describe your OS and provide the output of the following commands:
 - ``ag --version``
 - ``xargs --version``
 - ``xxh64sum --version``
+- ``pdftotext -v``
 
 **Filenames**
 Is the behavior correct when run from a directory with only PDFs that have ASCII filenames?
