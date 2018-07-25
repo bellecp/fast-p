@@ -29,3 +29,6 @@ Describe your OS and provide the output of the following commands:
 
 **Filenames**
 Is the behavior correct when run from a directory with only PDFs that have ASCII filenames?
+
+**pdftotext**
+Try the command ``pdftotext -f 1 -l 2 some_of_your_pdf.pdf`` with some of your PDF. Does it extract the first two pages as expected?
