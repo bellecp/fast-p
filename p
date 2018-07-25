@@ -5,6 +5,7 @@ p () {
     CACHEDLIST="/tmp/fewijbbioasAAAA"
     DIR="${HOME}/.cache/pdftotext"
     mkdir -p "${DIR}"
+    touch "$DIR/NOOP"
     if [ "$(uname)" = "Darwin" ]; then
         open=open
     else
