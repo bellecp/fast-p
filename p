@@ -21,7 +21,7 @@ p () {
         | xargs xxh64sum \
         | sed 's/  /\t/' \
         | sort \
-        | awk 'BEGIN {FS="\t"; OFS="\t"}; !seen[$1]++ {print $1, $2}' \
+        | gawk '!seen[$1]++ {print $1, $2}' FS='\t' OFS='\t' \
         >| $PDFLIST
 
     # printed (hashsum,cached text) for every previously cached output of pdftotext
@@ -39,14 +39,14 @@ p () {
         join -t '	' $PDFLIST $CACHEDLIST; # already cached pdfs
         # Next, apply pdftotext to pdfs that haven't been cached yet
         comm -13 \
-            <(cat $CACHEDLIST | awk 'BEGIN {FS="\t"; OFS="\t"}; {print $1}') \
-            <(cat $PDFLIST | awk 'BEGIN {FS="\t"; OFS="\t"}; {print $1}') \
+            <(cat $CACHEDLIST | gawk  '{print $1}' FS='\t' OFS='\t') \
+            <(cat $PDFLIST | gawk '{print $1}' FS='\t' OFS='\t') \
             | join -t '	' - $PDFLIST \
-            | awk 'BEGIN {FS="\t"; OFS="\t"}; !seen[$1]++ {print $1, $2}' \
+            | gawk '!seen[$1]++ {print $1, $2}' FS='\t' OFS='\t' \
             | \
             while read -r LINE; do
                 local CACHE
-                IFS="	"; set -- $LINE;
+                IFS=$'\t'; set -- $LINE;
                 CACHE="$DIR/$1"
                 pdftotext -f 1 -l 2 "$2" - 2>/dev/null | tr "\n" "__" >| $CACHE
                 echo -e "$1	$2	$(cat $CACHE)"
@@ -59,7 +59,7 @@ v=$(echo {q} | tr " " "|");
 echo {2} | grep -E "^|$v" -i --color=always;
 echo {3} | tr "__" "\n" | grep -E "^|$v" -i --color=always;
 ' \
-    | awk 'BEGIN {FS="\t"; OFS="\t"}; {print $2}'  \
+    | gawk '{print $2}' FS='\t' \
     | sed 's/\([ \o47()"&;\\]\)/\\\1/g;s/\o15/\\r/g'  \
     | xargs $open > /dev/null 2> /dev/null
 
