@@ -21,7 +21,7 @@ p () {
         | sed 's/  /\t/' \
         | sort \
         | awk 'BEGIN {FS="\t"; OFS="\t"}; !seen[$1]++ {print $1, $2}' \
-        > $PDFLIST
+        >| $PDFLIST
 
     # printed (hashsum,cached text) for every previously cached output of pdftotext
     # remove full path
@@ -31,7 +31,7 @@ p () {
         | sed 's=.*cache/pdftotext/==' \
         | sed 's/:/\t/' \
         | sort \
-        > $CACHEDLIST
+        >| $CACHEDLIST
 
     {
         echo " "; # starting to type query sends it to fzf right away
@@ -47,7 +47,7 @@ p () {
                 local CACHE
                 IFS="	"; set -- $LINE;
                 CACHE="$DIR/$1"
-                pdftotext -f 1 -l 2 "$2" - 2>/dev/null | tr "\n" "__" > $CACHE
+                pdftotext -f 1 -l 2 "$2" - 2>/dev/null | tr "\n" "__" >| $CACHE
                 echo -e "$1	$2	$(cat $CACHE)"
             done
 } | fzf --reverse -e -d '\t'  \
