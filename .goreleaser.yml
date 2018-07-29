@@ -20,3 +20,13 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+
+nfpm:
+  # You can change the name of the package.
+  # Default: `{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}`
+  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+  # Formats to be generated.
+  formats:
+    - deb
+    - rpm
