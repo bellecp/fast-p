@@ -30,3 +30,4 @@ nfpm:
   formats:
     - deb
     - rpm
+  license: MIT
