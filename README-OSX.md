@@ -31,7 +31,7 @@ p () {
             v=$(echo {q} | tr " " "|"); 
             echo -e {1}"\n"{2} | grep -E "^|$v" -i --color=always;
         ' \
-    | cut -z -f 1 -d $'\t' | tr -d '\n' | xargs --null open
+    | cut -z -f 1 -d $'\t' | tr -d '\n' | xargs -r --null open
 }
 
 ```
