@@ -8,7 +8,6 @@ import (
 	"os"
 	"os/exec"
         "bufio"
-        "strings"
 	"github.com/boltdb/bolt"
         "github.com/cespare/xxhash"
         "github.com/mitchellh/go-homedir"
@@ -43,6 +42,8 @@ func main() {
             log.Fatal(err)
     }
     defer db.Close()
+
+    nullByte := "\u0000"
 
     db.Update(func(tx *bolt.Tx) error {
         b, err := tx.CreateBucketIfNotExists([]byte(bucketName))
@@ -83,7 +84,7 @@ func main() {
                 log.Println(err2)
             }
             if found == true {
-                fmt.Println(filepath + "\t" + content)
+                fmt.Println(filepath + "\t" + content + nullByte)
             } else {
                 missing[hash] = filepath
             }
@@ -93,11 +94,10 @@ func main() {
         cmd := exec.Command("pdftotext", "-l", "2", filepath, "-")
         out, err := cmd.CombinedOutput()
         content := string(out)
-        content = strings.Replace(content, "\n", "__", -1)
         if err != nil {
             log.Println(err)
         }
-        fmt.Println(filepath + "\t" + content)
+        fmt.Println(filepath + "\t" + content + nullByte)
         db.Update(func(tx *bolt.Tx) error {
             b := tx.Bucket([]byte(bucketName))
             err := b.Put([]byte(hash), []byte(content))
