@@ -9,11 +9,16 @@
 
 #### Install binary
 
-Download the binary that corresponds to your architecture at https://github.com/bellecp/fast-p/releases
-and make sure that the command ``fast-p`` can be found. Darwin is meant for OSX.
+Do either one of the two steps below:
 
+1. _Install the binary._ Download the binary that corresponds to your architecture at https://github.com/bellecp/fast-p/releases
+and make sure that the command ``fast-p`` can be found. Darwin is meant for OSX.
 For instance, put the binary file ``fast-p`` in ``~/custom/bin`` and add
 ``export PATH=~/custom/bin:$PATH`` to your ``.bashrc``.
+
+2. _Compile from source with ``go`` and ``go get``._
+``go get github.com/bellecp/fast-p`` will fetch the code and its dependencies, compile and create an executable ``fast-p`` in the ``/bin`` 
+folder of your go installation, typically ``~/go/bin``. Make sure the command ``fast-p`` can be found (for instance, add ``~/go/bin`` to your ``$PATH``.)
 
 #### Next, add the following code to your .bashrc
 
