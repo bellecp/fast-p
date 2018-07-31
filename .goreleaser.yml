@@ -43,4 +43,4 @@ snapcraft:
 
   # see https://goreleaser.com/snapcraft/ for documentation
   grade: stable
-  confinement: strict
+  confinement: classic # needed to access the pdftotext executable
