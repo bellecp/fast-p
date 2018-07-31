@@ -53,11 +53,7 @@ func main() {
         }
         return nil
     })
-    db.Update(func(tx *bolt.Tx) error {
-        b := tx.Bucket([]byte(bucketName))
-        err := b.Put([]byte("answer"), []byte("42"))
-        return err
-    })
+
     missing := make(map[string]string)
     alreadySeen := make(map[string]bool)
 
