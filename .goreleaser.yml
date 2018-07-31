@@ -34,13 +34,3 @@ nfpm:
     - deb
     - rpm
   license: MIT
-
-
-snapcraft:
-  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-  summary: Fast pdf fuzzy finder
-  description: Fast pdf fuzzy finder
-
-  # see https://goreleaser.com/snapcraft/ for documentation
-  grade: stable
-  confinement: classic # needed to access the pdftotext executable
