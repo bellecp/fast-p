@@ -26,8 +26,20 @@ nfpm:
   # Default: `{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}`
   name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
+  homepage: https://github.com/bellecp/fast-p
+  description: Fast pdf fuzzy finder
+
   # Formats to be generated.
   formats:
     - deb
     - rpm
   license: MIT
+
+
+snapcraft:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+  summary: Fast pdf fuzzy finder
+
+  # see https://goreleaser.com/snapcraft/ for documentation
+  grade: stable
+  confinement: strict
