@@ -32,6 +32,13 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 3. __Tweak your .bashrc__. Add the following code to your ``.bashrc``
 ```
 p () {
+    local open
+    if [ "$(uname)" = "Darwin" ]; then
+        open=open       # on OSX, "open" opens a pdf in preview
+    else
+        open=xdg-open   # this will open pdf file withthe default PDF viewer on KDE, xfce, LXDE and perhaps on other desktops.
+    fi
+
     ag -U -g ".pdf$" \
     | fast-p \
     | fzf --read0 --reverse -e -d $'\t'  \
@@ -39,11 +46,12 @@ p () {
             v=$(echo {q} | tr " " "|"); 
             echo -e {1}"\n"{2} | grep -E "^|$v" -i --color=always;
         ' \
-    | cut -z -f 1 -d $'\t' | tr -d '\n' | xargs -r --null $open
+    | cut -z -f 1 -d $'\t' | tr -d '\n' | xargs -r --null $open > /dev/null 2> /dev/null
 }
 
 ```
-You may replace ``ag -U -g ".pdf$`` with another command that returns a list of pdf files.
+    - You may replace ``ag -U -g ".pdf$`` with another command that returns a list of pdf files.
+    - You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
 
 # Usage
 
