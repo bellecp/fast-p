@@ -2,7 +2,10 @@
 
 Quickly find and open a pdf among a collection of thousands of unsorted pdfs through fzf (fuzzy finder)
 
-![illustration of the p command](https://user-images.githubusercontent.com/1019692/34446795-12229072-ecac-11e7-856a-ec0df0de60ae.gif)
+- [Installation](#installation)
+- [Usage](#usage)
+- [See it in action](#see-it-in-action)
+- [Is the historical bash code still available?](#is-the-historical-bash-code-still-available)
 
 # Installation
 
@@ -15,7 +18,7 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 2. __Install binary__. Do either one of the two steps below:
     - __Compile from source with ``go`` and ``go get``.__
     With a working ``golang`` installationm, do 
-    ``go get github.com/bellecp/fast-p```
+    ```go get github.com/bellecp/fast-p```
     It will fetch the code and its dependencies,
     compile and create an executable ``fast-p`` in the ``/bin`` folder of your go
     installation, typically ``~/go/bin``. Make sure the command ``fast-p`` can be
@@ -44,8 +47,13 @@ You may replace ``ag -U -g ".pdf$`` with another command that returns a list of 
 
 # Usage
 
-Use the command ``p`` to browse among your pdfs.
+Use the command ``p`` to browse among the PDF files in the current directory and its subdirectories.
+
 The first run of the command will take some time to cache the text extracted from each pdf. Further runs of the command will be much faster since the text extraction will only apply to new pdfs.
+
+# See it in action
+
+![illustration of the p command](https://user-images.githubusercontent.com/1019692/34446795-12229072-ecac-11e7-856a-ec0df0de60ae.gif)
 
 
 # Is the historical bash code still available?
