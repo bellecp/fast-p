@@ -50,8 +50,8 @@ p () {
 }
 
 ```
-    - You may replace ``ag -U -g ".pdf$`` with another command that returns a list of pdf files.
-    - You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
+- You may replace ``ag -U -g ".pdf$`` with another command that returns a list of pdf files.
+- You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
 
 # Usage
 
