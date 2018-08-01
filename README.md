@@ -2,6 +2,8 @@
 
 Quickly find and open a pdf among a collection of thousands of unsorted pdfs through fzf (fuzzy finder)
 
+![illustration of the p command](https://user-images.githubusercontent.com/1019692/34446795-12229072-ecac-11e7-856a-ec0df0de60ae.gif)
+
 # Installation
 
 1. __Requirements.__ Make sure the following requirements are satisfied:
@@ -11,19 +13,20 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
     - install ``GNU grep``,  ``ag`` (silver searcher)
 
 2. __Install binary__. Do either one of the two steps below:
-    a. __Compile from source with ``go`` and ``go get``.__
-    With a working ``golang`` installationm, do ``go get github.com/bellecp/fast-p``.
+    - __Compile from source with ``go`` and ``go get``.__
+    With a working ``golang`` installationm, do 
+    ``go get github.com/bellecp/fast-p```
     It will fetch the code and its dependencies,
     compile and create an executable ``fast-p`` in the ``/bin`` folder of your go
     installation, typically ``~/go/bin``. Make sure the command ``fast-p`` can be
     found (for instance, add ``~/go/bin`` to your ``$PATH``.)
-    b. __Install the binary.__ Download the binary that corresponds to your
+    - Or: __Use the precompiled binary for your architecture.__ Download the binary that corresponds to your
     architecture at https://github.com/bellecp/fast-p/releases and make sure that
     the command ``fast-p`` can be found. Darwin is meant for OSX.  For instance,
     put the binary file ``fast-p`` in ``~/custom/bin`` and add ``export
     PATH=~/custom/bin:$PATH`` to your ``.bashrc``.
 
-3.Next, add the following code to your ``.bashrc``
+3. __Tweak your .bashrc__. Add the following code to your ``.bashrc``
 ```
 p () {
     ag -U -g ".pdf$" \
@@ -37,6 +40,7 @@ p () {
 }
 
 ```
+You may replace ``ag -U -g ".pdf$`` with another command that returns a list of pdf files.
 
 # Usage
 
