@@ -1,3 +1,22 @@
+# This file is kept only for historical reasons.  
+# It is recommended to use the go binary and the installatoin procedure
+# describe at https://github.com/bellecp/fast-p
+
+## Installation
+# - install ``pdftotext``. This comes with the texlive distribution on linux or with poppler on OSX.
+# - install ``fzf``: https://github.com/junegunn/fzf
+# - install ``xxhash``: https://github.com/Cyan4973/xxHash
+# - install ``GNU grep``,  ``ag`` (silver searcher)
+# - clone the repository: ``$ git clone https://github.com/bellecp/fast-p.git`` 
+# - add a line ``source fast-p/p`` to your .bashrc or .bash_profile
+# - Run the command ``p``. The first run of the command will take some time to
+# cache the text extracted from each pdf. Further runs of the command will be
+# much faster since the text extraction will only apply to new pdfs.
+#
+## Usage
+#
+# Run the command ``p`` and start typing keywords to search for pdf.
+# Type "enter" to view the pdf in the default viewer
 
 p () {
     local DIR open CACHEDLIST PDFLIST
