@@ -28,6 +28,7 @@ nfpm:
 
   homepage: https://github.com/bellecp/fast-p
   description: Fast pdf fuzzy finder
+  maintainer: http://github.com/bellecp
 
   # Formats to be generated.
   formats:
