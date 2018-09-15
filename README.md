@@ -4,6 +4,7 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 
 - [Installation on Linux](#installation-on-unix-or-linux-based-systems)
 - [Installation on OSX](#installation-on-osx-with-homebrew)
+- [Installation with homebrew formula (experimental, feedback welcome)](#experimental-installation-on-osx-with-homebrew-formula)
 - [Usage](#usage)
 - [See it in action](#see-it-in-action)
 - [Is the historical bash code still available?](#is-the-historical-bash-code-still-available)
