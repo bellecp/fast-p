@@ -7,13 +7,13 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 - [See it in action](#see-it-in-action)
 - [Is the historical bash code still available?](#is-the-historical-bash-code-still-available)
 
-# Installation
+# Installation on Unix or Linux based systems
 
 1. __Requirements.__ Make sure the following requirements are satisfied:
-    - install ``pdftotext``. This comes with the texlive distribution on linux or with poppler on OSX.
-    On ubuntu, ``sudo apt-get install poppler-utils`` . On OSX, ``brew install poppler``.
+    - install ``pdftotext``. This comes with the texlive distribution on linux,
+    On ubuntu, ``sudo apt-get install poppler-utils`` . 
     - install ``fzf``: https://github.com/junegunn/fzf
-    - install ``GNU grep``,  ``ag`` (silver searcher)
+    - install ``GNU grep``,  ``ag`` (silver searcher).
 
 2. __Install binary__. Do either one of the two steps below:
     - __Compile from source with ``go`` and ``go get``.__
@@ -21,6 +21,50 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
     ```go get github.com/bellecp/fast-p```
     It will fetch the code and its dependencies,
     compile and create an executable ``fast-p`` in the ``/bin`` folder of your go
+    installation, typically ``~/go/bin``. Make sure the command ``fast-p`` can be
+    found (for instance, add ``~/go/bin`` to your ``$PATH``.)
+    - Or: __Use the precompiled binary for your architecture.__ Download the binary that corresponds to your
+    architecture at https://github.com/bellecp/fast-p/releases and make sure that
+    the command ``fast-p`` can be found. For instance,
+    put the binary file ``fast-p`` in ``~/custom/bin`` and add ``export
+    PATH=~/custom/bin:$PATH`` to your ``.bashrc``.
+
+3. __Tweak your .bashrc__. Add the following code to your ``.bashrc``
+```
+p () {
+    open=xdg-open   # this will open pdf file withthe default PDF viewer on KDE, xfce, LXDE and perhaps on other desktops.
+
+    ag -U -g ".pdf$" \
+    | fast-p \
+    | fzf --read0 --reverse -e -d $'\t'  \
+        --preview-window down:80% --preview '
+            v=$(echo {q} | tr " " "|"); 
+            echo -e {1}"\n"{2} | grep -E "^|$v" -i --color=always;
+        ' \
+    | cut -z -f 1 -d $'\t' | tr -d '\n' | xargs -r --null $open > /dev/null 2> /dev/null
+}
+
+```
+- You may replace ``ag -U -g ".pdf$"`` with another command that returns a list of pdf files.
+- You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
+
+# Installation on OSX with homebrew
+
+1. __Requirements.__
+    You need the Homebrew <https://brew.sh/>. Next, you need the commandline tools 
+    ``fzf``,
+    ``pdftotext``,
+    ``ag`` (silver searcher) as well as ``ggrep``, ``gcut``, ``gxargs``; these can be installed all at once with
+    ```
+    brew install fzf coreutils findutils poppler-utils the_silver_searcher
+    ```
+
+2. __Install binary__. Do either one of the two steps below:
+    - __Compile from source with ``go`` and ``go get``.__
+    With a working ``golang`` installation, do 
+    ```go get github.com/bellecp/fast-p```
+    It will fetch the code and its dependencies,
+    compile and create an executable ``fast-p`` in the ``bin/`` folder of your go
     installation, typically ``~/go/bin``. Make sure the command ``fast-p`` can be
     found (for instance, add ``~/go/bin`` to your ``$PATH``.)
     - Or: __Use the precompiled binary for your architecture.__ Download the binary that corresponds to your
@@ -33,20 +77,15 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 ```
 p () {
     local open
-    if [ "$(uname)" = "Darwin" ]; then
-        open=open       # on OSX, "open" opens a pdf in preview
-    else
-        open=xdg-open   # this will open pdf file withthe default PDF viewer on KDE, xfce, LXDE and perhaps on other desktops.
-    fi
-
+    open=open   # on OSX, "open" opens a pdf in preview
     ag -U -g ".pdf$" \
     | fast-p \
     | fzf --read0 --reverse -e -d $'\t'  \
         --preview-window down:80% --preview '
-            v=$(echo {q} | tr " " "|"); 
-            echo -e {1}"\n"{2} | grep -E "^|$v" -i --color=always;
+            v=$(echo {q} | gtr " " "|"); 
+            echo -e {1}"\n"{2} | ggrep -E "^|$v" -i --color=always;
         ' \
-    | cut -z -f 1 -d $'\t' | tr -d '\n' | xargs -r --null $open > /dev/null 2> /dev/null
+    | gcut -z -f 1 -d $'\t' | gtr -d '\n' | gxargs -r --null $open > /dev/null 2> /dev/null
 }
 
 ```
