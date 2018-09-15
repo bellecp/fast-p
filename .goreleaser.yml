@@ -27,7 +27,7 @@ nfpm:
   name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
   homepage: https://github.com/bellecp/fast-p
-  description: Fast pdf fuzzy finder
+  description: Fast commandline pdf fuzzy finder
   maintainer: http://github.com/bellecp
 
   # Formats to be generated.
@@ -37,7 +37,7 @@ nfpm:
   license: MIT
 
 brew:
-  name: fast-p
+  name: fast-pdf-finder
 
   github:
     owner: bellecp
@@ -68,4 +68,4 @@ brew:
   # Custom install script for brew.
   # Default is 'bin.install "program"'.
   install: |
-    bin.install "program"
+    bin.install "fast-p"
