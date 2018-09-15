@@ -93,6 +93,34 @@ p () {
 - You may replace ``ag -U -g ".pdf$"`` with another command that returns a list of pdf files.
 - You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
 
+# !Experimental!: installation on OSX with homebrew formula
+
+This is experimental. Please report any issues/suggestions/feedback at <https://github.com/bellecp/fast-p/issues/11>
+
+1. Install ``homebrew`` and perform
+```
+brew install bellecp/fast-p/fast-pdf-finder
+```
+
+2. __Tweak your .bashrc__. Add the following code to your ``.bashrc``
+```
+p () {
+    local open
+    open=open   # on OSX, "open" opens a pdf in preview
+    ag -U -g ".pdf$" \
+    | fast-p \
+    | fzf --read0 --reverse -e -d $'\t'  \
+        --preview-window down:80% --preview '
+            v=$(echo {q} | gtr " " "|"); 
+            echo -e {1}"\n"{2} | ggrep -E "^|$v" -i --color=always;
+        ' \
+    | gcut -z -f 1 -d $'\t' | gtr -d '\n' | gxargs -r --null $open > /dev/null 2> /dev/null
+}
+
+```
+- You may replace ``ag -U -g ".pdf$"`` with another command that returns a list of pdf files.
+- You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
+
 # Usage
 
 Use the command ``p`` to browse among the PDF files in the current directory and its subdirectories.
