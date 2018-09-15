@@ -41,9 +41,7 @@ brew:
 
   github:
     owner: bellecp
-    name: fast-p
-
-  folder: HomebrewFormula
+    name: homebrew-fast-p
 
   # Git author used to commit to the repository.
   # Defaults are shown.
