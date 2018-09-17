@@ -4,7 +4,6 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 
 - [Installation on Linux](#installation-on-unix-or-linux-based-systems)
 - [Installation on OSX](#installation-on-osx-with-homebrew)
-- [Installation with homebrew formula (experimental, feedback welcome)](#experimental-installation-on-osx-with-homebrew-formula)
 - [Usage](#usage)
 - [See it in action](#see-it-in-action)
 - [Is the historical bash code still available?](#is-the-historical-bash-code-still-available)
@@ -52,56 +51,12 @@ p () {
 
 # Installation on OSX with homebrew
 
-1. __Requirements.__
-    You need the Homebrew <https://brew.sh/>. Next, you need the commandline tools 
-    ``fzf``,
-    ``pdftotext``,
-    ``ag`` (silver searcher) as well as ``ggrep``, ``gcut``, ``gxargs``; these can be installed all at once with
-    ```
-    brew install fzf coreutils findutils poppler pkg-config the_silver_searcher
-    ```
-
-2. __Install binary__. Do either one of the two steps below:
-    - __Compile from source with ``go`` and ``go get``.__
-    With a working ``golang`` installation, do 
-    ```go get github.com/bellecp/fast-p```
-    It will fetch the code and its dependencies,
-    compile and create an executable ``fast-p`` in the ``bin/`` folder of your go
-    installation, typically ``~/go/bin``. Make sure the command ``fast-p`` can be
-    found (for instance, add ``~/go/bin`` to your ``$PATH``.)
-    - Or: __Use the precompiled binary for your architecture.__ Download the binary that corresponds to your
-    architecture at https://github.com/bellecp/fast-p/releases and make sure that
-    the command ``fast-p`` can be found. Darwin is meant for OSX.  For instance,
-    put the binary file ``fast-p`` in ``~/custom/bin`` and add ``export
-    PATH=~/custom/bin:$PATH`` to your ``.bashrc``.
-
-3. __Tweak your .bashrc__. Add the following code to your ``.bashrc``
-```
-p () {
-    local open
-    open=open   # on OSX, "open" opens a pdf in preview
-    ag -U -g ".pdf$" \
-    | fast-p \
-    | fzf --read0 --reverse -e -d $'\t'  \
-        --preview-window down:80% --preview '
-            v=$(echo {q} | gtr " " "|"); 
-            echo -e {1}"\n"{2} | ggrep -E "^|$v" -i --color=always;
-        ' \
-    | gcut -z -f 1 -d $'\t' | gtr -d '\n' | gxargs -r --null $open > /dev/null 2> /dev/null
-}
-
-```
-- You may replace ``ag -U -g ".pdf$"`` with another command that returns a list of pdf files.
-- You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
-
-# !Experimental!: installation on OSX with homebrew formula
-
-This is experimental. Please report any issues/suggestions/feedback at <https://github.com/bellecp/fast-p/issues/11>
-
-1. Install ``homebrew`` and perform
+1. Install [homebrew](https://brew.sh/) and  __run__
 ```
 brew install bellecp/fast-p/fast-pdf-finder
 ```
+_This is experimental. Please report any issues/suggestions/feedback at <https://github.com/bellecp/fast-p/issues/11>_
+
 
 2. __Tweak your .bashrc__. Add the following code to your ``.bashrc``
 ```
@@ -121,6 +76,10 @@ p () {
 ```
 - You may replace ``ag -U -g ".pdf$"`` with another command that returns a list of pdf files.
 - You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
+
+__Remark:__ On OSX, we use the command line tools ``gcut``, ``gxargs``, ``ggrep``, ``gtr`` which are the GNU versions
+of the tools ``cut``, ``xargs``, ``grep``, ``tr``. This way, we avoid the versions of these tools pre-installed on OSX
+the same ``.bashrc`` code can be used for OSX and Linux systems.
 
 # Usage
 
