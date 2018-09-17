@@ -55,7 +55,8 @@ p () {
 ```
 brew install bellecp/fast-p/fast-pdf-finder
 ```
-_This is experimental. Please report any issues/suggestions/feedback at <https://github.com/bellecp/fast-p/issues/11>_
+_The above brew formula is experimental. 
+Please report any issues/suggestions/feedback at <https://github.com/bellecp/fast-p/issues/11>_
 
 
 2. __Tweak your .bashrc__. Add the following code to your ``.bashrc``
