@@ -5,6 +5,7 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 - [Installation on Linux](#installation-on-unix-or-linux-based-systems)
 - [Installation on OSX](#installation-on-osx-with-homebrew)
 - [Usage](#usage)
+- [How to clear the cache?](#how-to-clear-the-cache)
 - [See it in action](#see-it-in-action)
 - [Is the historical bash code still available?](#is-the-historical-bash-code-still-available)
 
@@ -87,6 +88,10 @@ the same ``.bashrc`` code can be used for OSX and Linux systems.
 Use the command ``p`` to browse among the PDF files in the current directory and its subdirectories.
 
 The first run of the command will take some time to cache the text extracted from each pdf. Further runs of the command will be much faster since the text extraction will only apply to new pdfs.
+
+# How to clear the cache?
+
+To clear the cache (which contains text extracted from PDF), you may safely remove the file ``~/fast-p_cached_pdftotext_output.db``.
 
 # See it in action
 
