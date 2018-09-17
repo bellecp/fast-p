@@ -58,7 +58,7 @@ p () {
     ``pdftotext``,
     ``ag`` (silver searcher) as well as ``ggrep``, ``gcut``, ``gxargs``; these can be installed all at once with
     ```
-    brew install fzf coreutils findutils poppler-utils the_silver_searcher
+    brew install fzf coreutils findutils poppler pkg-config the_silver_searcher
     ```
 
 2. __Install binary__. Do either one of the two steps below:

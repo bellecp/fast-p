@@ -62,7 +62,8 @@ brew:
     - fzf
     - coreutils
     - findutils
-    - poppler-utils
+    - poppler
+    - pkg-config
     - the_silver_searcher
 
   # Custom install script for brew.
