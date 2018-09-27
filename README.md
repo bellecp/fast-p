@@ -80,8 +80,8 @@ p () {
 - You may replace ``open=...`` by your favorite PDF viewer, for instance ``open=evince`` or ``open=okular``.
 
 __Remark:__ On OSX, we use the command line tools ``gcut``, ``gxargs``, ``ggrep``, ``gtr`` which are the GNU versions
-of the tools ``cut``, ``xargs``, ``grep``, ``tr``. This way, we avoid the versions of these tools pre-installed on OSX
-the same ``.bashrc`` code can be used for OSX and Linux systems.
+of the tools ``cut``, ``xargs``, ``grep``, ``tr``. This way, we avoid the specifics of the versions of these tools pre-installed on OSX,
+and the same ``.bashrc`` code can be used for both OSX and GNU Linux systems.
 
 # Usage
 
