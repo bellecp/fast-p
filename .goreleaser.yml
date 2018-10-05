@@ -59,6 +59,7 @@ brew:
 
   # Packages your package depends on.
   dependencies:
+    - grep
     - fzf
     - coreutils
     - findutils
