@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+        "path/filepath"
 	"os/exec"
         "bufio"
 	"github.com/boltdb/bolt"
@@ -31,8 +32,14 @@ func hash_file_xxhash(filePath string) (string, error) {
 }
 
 func main() {
+    // Create ~/.cache folder if does not exist
+    // https://stackoverflow.com/questions/37932551/mkdir-if-not-exists-using-golang
+    cachePath, err := homedir.Expand("~/.cache/fast-p-pdftotext-output/")
+    os.MkdirAll(cachePath, os.ModePerm)
+
+    // open BoltDB cache database
     scanner := bufio.NewScanner(os.Stdin)
-    boltDbFilepath, err := homedir.Expand("~/fast-p_cached_pdftotext_output.db")
+    boltDbFilepath := filepath.Join(cachePath, "fast-p_cached_pdftotext_output.db")
     if err != nil {
             log.Fatal(err)
     }
