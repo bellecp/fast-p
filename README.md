@@ -91,7 +91,9 @@ The first run of the command will take some time to cache the text extracted fro
 
 # How to clear the cache?
 
-To clear the cache (which contains text extracted from PDF), you may safely remove the file ``~/fast-p_cached_pdftotext_output.db``.
+To clear the cache (which contains text extracted from PDF), you may safely remove the file 
+``~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db``, or  
+``~/.cache/fast-p_cached_pdftotext_output.db`` in older version.
 
 # See it in action
 
