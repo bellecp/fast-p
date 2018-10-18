@@ -27,10 +27,47 @@ nfpm:
   name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
   homepage: https://github.com/bellecp/fast-p
-  description: Fast pdf fuzzy finder
+  description: Fast commandline pdf fuzzy finder
+  maintainer: http://github.com/bellecp
 
   # Formats to be generated.
   formats:
     - deb
     - rpm
   license: MIT
+
+brew:
+  name: fast-pdf-finder
+
+  github:
+    owner: bellecp
+    name: homebrew-fast-p
+
+  # Git author used to commit to the repository.
+  # Defaults are shown.
+  commit_author:
+    name: bellecp
+    email: bellecp@users.noreply.github.com
+
+  # Your app's homepage.
+  # Default is empty.
+  homepage: "https://github.com/bellecp/fast-p"
+
+  # Your app's description.
+  # Default is empty.
+  description: "Fast, command-line PDF finder"
+
+  # Packages your package depends on.
+  dependencies:
+    - grep
+    - fzf
+    - coreutils
+    - findutils
+    - poppler
+    - pkg-config
+    - the_silver_searcher
+
+  # Custom install script for brew.
+  # Default is 'bin.install "program"'.
+  install: |
+    bin.install "fast-p"
