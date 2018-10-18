@@ -38,15 +38,22 @@ p () {
     else
         open=xdg-open   # this will open pdf file withthe default PDF viewer on KDE, xfce, LXDE and perhaps on other desktops.
     fi
-
-    ag -U -g ".pdf$" \
-    | fast-p \
-    | fzf --read0 --reverse -e -d $'\t'  \
-        --preview-window down:80% --preview '
-            v=$(echo {q} | tr " " "|"); 
-            echo -e {1}"\n"{2} | grep -E "^|$v" -i --color=always;
-        ' \
-    | cut -z -f 1 -d $'\t' | tr -d '\n' | xargs -r --null $open > /dev/null 2> /dev/null
+    
+    interactive_find() {
+    # bash func to return the found pdf file name/path
+        ag -U -g ".pdf$" \
+        | fast-p \
+        | fzf --read0 --reverse -e -d $'\t'  \
+            --preview-window down:80% --preview '
+                v=$(echo {q} | tr " " "|"); 
+                echo -e {1}"\n"{2} | grep -E "^|$v" -i --color=always;
+            ' \
+        | gcut -z -f 1 -d $'\t' | tr -d '\n' | xargs -I F echo "F"
+    }
+    
+    last_found_pdf=$(interactive_find) # store the last found pdf in the variable
+    echo $last_found_pdf
+    open $last_found_pdf
 }
 
 ```
