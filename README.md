@@ -55,7 +55,7 @@ p () {
     
     last_found_pdf=$(interactive_find) # store the last found pdf in the variable
     echo $last_found_pdf
-    open $last_found_pdf
+    open "$last_found_pdf" # Double quote to deal with filepath with spaces"
 }
 
 ```
