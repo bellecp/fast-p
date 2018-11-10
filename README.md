@@ -6,6 +6,7 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 - [Installation on OSX](#installation-on-osx-with-homebrew)
 - [Usage](#usage)
 - [How to clear the cache?](#how-to-clear-the-cache)
+- [Launch with keyboard shortcut in Ubuntu](#launch-with-keyboard-shortcut-in-ubuntu)
 - [See it in action](#see-it-in-action)
 - [Is the historical bash code still available?](#is-the-historical-bash-code-still-available)
 
@@ -94,6 +95,22 @@ The first run of the command will take some time to cache the text extracted fro
 To clear the cache (which contains text extracted from PDF), you may safely remove the file 
 ``~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db``, or  
 ``~/.cache/fast-p_cached_pdftotext_output.db`` in older version.
+
+# Launch with keyboard shortcut in Ubuntu
+
+On Ubuntu desktop (tested in 18.04), one may add a keyboard shortcut to launch a new terminal running the ``p`` command right away.
+With the following script, the new terminal window will automatically close after choosing a PDF.
+
+Create a file ``~/.fast-p-rc`` with
+```
+source .bashrc
+p;
+sleep 0.15; exit;
+```
+and in Ubuntu Settings/Keyboard, add a custom shortcut that runs the command
+``gnome-terminal -- sh -c "bash --rcfile .fast-p-rc"``.
+
+
 
 # See it in action
 
