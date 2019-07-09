@@ -53,7 +53,7 @@ func main() {
 	flag.Parse()
 
 	if *version != false {
-		fmt.Printf("v.0.2.4 \nhttps://github.com/bellecp/fast-p\n")
+		fmt.Printf("v.0.2.5 \nhttps://github.com/bellecp/fast-p\n")
 		os.Exit(0)
 	}
 
