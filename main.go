@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"flag"
         "path/filepath"
 	"os/exec"
         "bufio"
@@ -32,6 +33,25 @@ func hash_file_xxhash(filePath string) (string, error) {
 }
 
 func main() {
+    version := flag.Bool("version", false, "Display program version")
+    clearCache := flag.Bool("clear-cache", false, "Delete cache file located at: \n~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db")
+    flag.Parse()
+
+    if *version != false {
+        fmt.Printf("v.0.2.4 \nhttps://github.com/bellecp/fast-p\n")
+        os.Exit(0)
+    }
+
+    if *clearCache !=false {
+        removePath, err := homedir.Expand("~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db")
+        if err != nil {
+            log.Fatal(err)
+            os.Exit(1)
+        }
+        os.Remove(removePath)
+        os.Exit(0)
+    }
+
     // Create ~/.cache folder if does not exist
     // https://stackoverflow.com/questions/37932551/mkdir-if-not-exists-using-golang
     cachePath, err := homedir.Expand("~/.cache/fast-p-pdftotext-output/")

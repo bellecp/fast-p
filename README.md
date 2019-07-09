@@ -92,9 +92,11 @@ The first run of the command will take some time to cache the text extracted fro
 
 # How to clear the cache?
 
-To clear the cache (which contains text extracted from PDF), you may safely remove the file 
-``~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db``, or  
-``~/.cache/fast-p_cached_pdftotext_output.db`` in older version.
+To clear the cache (which contains text extracted from PDF), you can run 'fast-p --clear-cache'. This will safely remove the file located at:
+``~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db``
+
+For older versions, please manually delete the cache file found at
+``~/.cache/fast-p_cached_pdftotext_output.db``
 
 # Launch with keyboard shortcut in Ubuntu
 
