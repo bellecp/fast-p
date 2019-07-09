@@ -88,7 +88,7 @@ func main() {
 	nullByte := "\u0000"
 
 	db.Update(func(tx *bolt.Tx) error {
-		b, err := tx.CreateBucketIfNotExists([]byte(bucketName))
+		_, err := tx.CreateBucketIfNotExists([]byte(bucketName))
 		if err != nil {
 			return fmt.Errorf("create bucket: %s", err)
 		}
