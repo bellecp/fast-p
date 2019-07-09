@@ -74,7 +74,6 @@ func main() {
 
 	db.Update(func(tx *bolt.Tx) error {
 		b, err := tx.CreateBucketIfNotExists([]byte(bucketName))
-		b.Put([]byte("answer"), []byte("42"))
 		if err != nil {
 			return fmt.Errorf("create bucket: %s", err)
 		}
