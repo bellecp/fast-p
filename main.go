@@ -33,6 +33,21 @@ func hash_file_xxhash(filePath string) (string, error) {
 }
 
 func main() {
+	flag.Usage = func() {
+		fmt.Printf(`Usage: fast-p [OPTIONS]
+    Reads a list of PDF filenames from STDIN and returns a list of null-byte
+    separated items of the form
+        filename[TAB]text
+    where "text" is the text extracted from the first two pages of the PDF
+    by pdftotext and [TAB] denotes a tab character "\t".
+
+    Common usage of this tool is to pipe the result to FZF with a command in
+    your .bashrc as explained in https://github.com/bellecp/fast-p.
+
+
+`)
+		flag.PrintDefaults()
+	}
 	version := flag.Bool("version", false, "Display program version")
 	clearCache := flag.Bool("clear-cache", false, "Delete cache file located at: \n~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db")
 	flag.Parse()
