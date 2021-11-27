@@ -21,7 +21,7 @@ Quickly find and open a pdf among a collection of thousands of unsorted pdfs thr
 2. __Install binary__. Do either one of the two steps below:
     - __Compile from source with ``go`` and ``go get``.__
     With a working ``golang`` installation, do 
-    ```go get github.com/bellecp/fast-p```
+    ```go install github.com/bellecp/fast-p@v0.2.5```
     It will fetch the code and its dependencies,
     compile and create an executable ``fast-p`` in the ``/bin`` folder of your go
     installation, typically ``~/go/bin``. Make sure the command ``fast-p`` can be
