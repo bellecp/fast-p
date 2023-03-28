@@ -13,6 +13,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 )
 
 func hash_file_xxhash(filePath string) (string, error) {
@@ -49,6 +50,9 @@ func main() {
 		flag.PrintDefaults()
 	}
 	version := flag.Bool("version", false, "Display program version")
+	// number := flag.Bool("n", false, "number of pages")
+	var numPages int
+	flag.IntVar(&numPages, "n", 2, "Number of pages")
 	clearCache := flag.Bool("clear-cache", false, "Delete cache file located at: \n~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db")
 	flag.Parse()
 
@@ -128,7 +132,7 @@ func main() {
 		}
 	}
 	for hash, filepath := range missing {
-		cmd := exec.Command("pdftotext", "-l", "2", filepath, "-")
+		cmd := exec.Command("pdftotext", "-l", strconv.Itoa(numPages), filepath, "-")
 		out, err := cmd.CombinedOutput()
 		content := string(out)
 		if err != nil {
