@@ -13,6 +13,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 )
 
 func hash_file_xxhash(filePath string) (string, error) {
@@ -49,6 +50,9 @@ func main() {
 		flag.PrintDefaults()
 	}
 	version := flag.Bool("version", false, "Display program version")
+	// number := flag.Bool("n", false, "number of pages")
+	var numPages int
+	flag.IntVar(&numPages, "n", 2, "number of pages")
 	clearCache := flag.Bool("clear-cache", false, "Delete cache file located at: \n~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db")
 	flag.Parse()
 
@@ -67,6 +71,15 @@ func main() {
 		os.Exit(0)
 	}
 
+	// if numPages != 2 {
+	// 	fmt.Printf("numPages is not 2")
+	// }
+
+	// if numPages == 2 {
+	fmt.Printf("numPages is %d \n", numPages)
+	// }
+
+	// fmt.Printf("hello world %d", numPages)
 	// Create ~/.cache folder if does not exist
 	// https://stackoverflow.com/questions/37932551/mkdir-if-not-exists-using-golang
 	cachePath, err := homedir.Expand("~/.cache/fast-p-pdftotext-output/")
@@ -128,7 +141,7 @@ func main() {
 		}
 	}
 	for hash, filepath := range missing {
-		cmd := exec.Command("pdftotext", "-l", "2", filepath, "-")
+		cmd := exec.Command("pdftotext", "-l", strconv.Itoa(numPages), filepath, "-")
 		out, err := cmd.CombinedOutput()
 		content := string(out)
 		if err != nil {
