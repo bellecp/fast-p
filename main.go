@@ -52,7 +52,7 @@ func main() {
 	version := flag.Bool("version", false, "Display program version")
 	// number := flag.Bool("n", false, "number of pages")
 	var numPages int
-	flag.IntVar(&numPages, "n", 2, "number of pages")
+	flag.IntVar(&numPages, "n", 2, "Number of pages")
 	clearCache := flag.Bool("clear-cache", false, "Delete cache file located at: \n~/.cache/fast-p-pdftotext-output/fast-p_cached_pdftotext_output.db")
 	flag.Parse()
 
@@ -71,15 +71,6 @@ func main() {
 		os.Exit(0)
 	}
 
-	// if numPages != 2 {
-	// 	fmt.Printf("numPages is not 2")
-	// }
-
-	// if numPages == 2 {
-	fmt.Printf("numPages is %d \n", numPages)
-	// }
-
-	// fmt.Printf("hello world %d", numPages)
 	// Create ~/.cache folder if does not exist
 	// https://stackoverflow.com/questions/37932551/mkdir-if-not-exists-using-golang
 	cachePath, err := homedir.Expand("~/.cache/fast-p-pdftotext-output/")
